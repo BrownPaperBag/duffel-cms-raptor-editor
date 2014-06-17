@@ -1,6 +1,11 @@
 (function() {
-  $('.cms-block').raptor({
+  var defaultOptions = {
     plugins: {
+      languageMenu: false,
+      dockToElement: false,
+      statistics: {
+        maximum: false
+      },
       dock: {
         docked: true,
         dockToScreen: true,
@@ -10,7 +15,7 @@
         plugin: 'saveRest'
       },
       saveRest: {
-        url: '/duffel-cms/admin/content/',
+        url: '/duffel-cms-raptor-editor/admin/content/',
         data: function(html) {
           return {
             name: this.raptor.getElement().data('name'),
@@ -21,5 +26,66 @@
         }
       }
     }
+  };
+
+  var tagOptions = {
+    plugins: {
+    }
+  };
+
+  var contentOptions = {
+    plugins: {
+      alignCenter: false,
+      alignJustify: false,
+      alignLeft: false,
+      alignRight: false,
+      classMenu: false,
+      clearFormatting: false,
+      floatLeft: false,
+      floatNone: false,
+      floatRight: false,
+      fontFamilyMenu: false,
+      hrCreate: false,
+      listOrdered: false,
+      listUnordered: false,
+      logo: false,
+      snippetMenu: false,
+      tableCreate: false,
+      tableDeleteColumn: false,
+      tableDeleteRow: false,
+      tableInsertColumn: false,
+      tableInsertRow: false,
+      tableMergeCells: false,
+      tableSplitCells: false,
+      tagMenu: false,
+      textBlockQuote: false,
+      textBold: false,
+      textItalic: false,
+      textSizeDecrease: false,
+      textSizeIncrease: false,
+      textStrike: false,
+      textSub: false,
+      textSuper: false,
+      textUnderline: false,
+    }
+  };
+
+  function getOptions(element) {
+    var options = defaultOptions;
+
+    var type = $(element).data('type');
+    if (type) {
+      if (type == 'Tag') {
+        options = $.extend({}, defaultOptions, tagOptions, $(this).data('raptor-options'), true);
+      } else if (type === 'Content') {
+        options = $.extend({}, defaultOptions, contentOptions, $(this).data('raptor-options'), true);
+      }
+    }
+
+    return options;
+  }
+
+  $('.cms-block').each(function() {
+    $(this).raptor(getOptions(this));
   });
 })();
