@@ -3,6 +3,7 @@
     plugins: {
       languageMenu: false,
       dockToElement: false,
+      logo: false,
       statistics: {
         maximum: false
       },
@@ -48,7 +49,6 @@
       hrCreate: false,
       listOrdered: false,
       listUnordered: false,
-      logo: false,
       snippetMenu: false,
       tableCreate: false,
       tableDeleteColumn: false,
@@ -71,15 +71,21 @@
   };
 
   function getOptions(element) {
+
     var options = defaultOptions;
 
     var type = $(element).data('type');
     if (type) {
       if (type == 'Tag') {
-        options = $.extend({}, defaultOptions, tagOptions, $(this).data('raptor-options'), true);
+        options = $.extend(true, {}, defaultOptions, tagOptions, $(this).data('raptor-options'));
       } else if (type === 'Content') {
-        options = $.extend({}, defaultOptions, contentOptions, $(this).data('raptor-options'), true);
+        options = $.extend(true, {}, defaultOptions, contentOptions, $(this).data('raptor-options'));
       }
+    }
+
+    var elementOptions = $(element).data('options');
+    if (elementOptions) {
+      options = $.extend(true, {}, options, elementOptions);
     }
 
     return options;
