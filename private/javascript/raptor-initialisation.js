@@ -88,6 +88,26 @@
       options = $.extend(true, {}, options, elementOptions);
     }
 
+    if ($(element).data('inline')) {
+      options.plugins.dock = {
+        dockToElement: true,
+        dockToScreen: false,
+        docked: true,
+        persist: false
+      };
+      options = $.extend(true, {}, options, {
+        autoEnable: true,
+        classes: 'raptor-editing-inline',
+        draggable: false,
+        unify: false,
+        unloadWarning: false,
+        reloadOnDisable: true,
+        plugins: {
+          dockToScreen: false
+        }
+      });
+    }
+
     return options;
   }
 
