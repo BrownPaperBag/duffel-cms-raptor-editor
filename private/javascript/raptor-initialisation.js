@@ -114,4 +114,7 @@
   $('.cms-block').each(function() {
     $(this).raptor(getOptions(this));
   });
+
+  window['getCMSOptions'] = getOptions;
+
 })();
