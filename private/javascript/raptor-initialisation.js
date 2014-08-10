@@ -22,6 +22,8 @@
             name: this.raptor.getElement().data('name'),
             _csrf: this.raptor.getElement().data('csrf'),
             type: this.raptor.getElement().data('type'),
+            owner_id: this.raptor.getElement().data('owner_id'),
+            owner_type: this.raptor.getElement().data('owner_type'),
             html: html
           };
         }
