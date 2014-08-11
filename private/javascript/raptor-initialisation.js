@@ -1,3 +1,4 @@
+/* jshint sub: true */
 (function() {
   var defaultOptions = {
     plugins: {
@@ -26,6 +27,15 @@
             owner_type: this.raptor.getElement().data('owner_type'),
             html: html
           };
+        }
+      },
+      revisions: {
+        url: function() {
+          var name = this.raptor.getElement().data('name'),
+            owner_id = this.raptor.getElement().data('owner_id'),
+            owner_type = this.raptor.getElement().data('owner_type');
+
+          return '/duffel-cms-raptor-editor/admin/content/revisions/' + name + '/' + owner_id + '/' + owner_type;
         }
       }
     }
